@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">EmployeeManagement2</string>
+    <string name="title">Quản lý nhân viên</string>
+    <string name="name_staff">Tên nhân viên</string>
+    <string name="infor_staff">Thông tin nhân viên</string>
+    <string name="id_staff">Mã nhân viên</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="department_name">Phòng ban</string>
+    <string name="status_name">Trạng thái</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_staff">Thêm nhân viên</string>
+    <string name="update">Cập nhập</string>
+    <string name="remove_staff">Xóa nhân viên</string>
+    <string name="edit_infor_staff">Chỉnh sửa thông tin</string>
+    <string name="close_dialog">Đóng</string>
+</resources>
