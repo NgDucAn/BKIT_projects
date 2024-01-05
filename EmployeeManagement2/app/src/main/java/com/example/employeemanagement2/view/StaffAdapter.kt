@@ -4,10 +4,15 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnLayoutChangeListener
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.PopupMenu
+import android.widget.RadioGroup
+import android.widget.RadioGroup.OnCheckedChangeListener
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.employeemanagement2.R
@@ -26,6 +31,7 @@ class StaffAdapter(
         return StaffViewHolder(binding)
     }
 
+    @SuppressLint("RecyclerView")
     override fun onBindViewHolder(holder: StaffViewHolder, position: Int) {
         val newList = staffList[position]
         holder.binding.tvNameStaff.text = newList.nameStaff
@@ -40,10 +46,27 @@ class StaffAdapter(
 
             context.startActivity(intentInforStaff)
         }
+
+        holder.binding.cbSelect.isChecked = newList.selected
+
+        holder.binding.cbSelect.setOnCheckedChangeListener { _, p1 ->
+            staffList[position].selected = p1
+        }
     }
 
     override fun getItemCount(): Int {
         return staffList.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun deleteItem() {
+        for (i in staffList) {
+            if (i.selected) {
+                Log.d("ASAHSKASH", ""+i.selected)
+                staffList.remove(i)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     inner class StaffViewHolder(val binding: ItemStaffBinding) :
@@ -95,6 +118,7 @@ class StaffAdapter(
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setFilteredList(staffList: ArrayList<StaffData>) {
         this.staffList = staffList
         notifyDataSetChanged()

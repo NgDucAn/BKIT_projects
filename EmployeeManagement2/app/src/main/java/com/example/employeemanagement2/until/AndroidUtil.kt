@@ -45,7 +45,8 @@ object AndroidUtil {
                             etIdStaff.text.toString(),
                             etNameStaff.text.toString(),
                             spDepartmentStaff.selectedItem.toString(),
-                            spStatusStaff.selectedItem.toString()
+                            spStatusStaff.selectedItem.toString(),
+                            false
                         )
                     )
 
@@ -93,11 +94,12 @@ object AndroidUtil {
                             etIdStaff.text.toString(),
                             etNameStaff.text.toString(),
                             spDepartmentStaff.selectedItem.toString(),
-                            spStatusStaff.selectedItem.toString()
+                            spStatusStaff.selectedItem.toString(),
+                            false
                         )
                     )
                     Toast.makeText(
-                        context, "Thông tin nhân viên đã thay đổi", Toast.LENGTH_SHORT
+                        context, "Đã thêm nhân viên", Toast.LENGTH_SHORT
                     ).show()
                     dialog.dismiss()
                 }.setNegativeButton("Cancel") { dialog, _ ->

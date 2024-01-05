@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        binding.fbDeleteItems.setOnClickListener() {
+            staffAdapter.deleteItem()
+        }
     }
 
     private fun filterList(query: String?) {
