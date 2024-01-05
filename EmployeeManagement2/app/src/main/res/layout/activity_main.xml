@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
-            app:queryHint="Search here ..." />
+            app:queryHint="@string/search" />
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -52,8 +52,8 @@
         app:layout_constraintTop_toBottomOf="@id/cv_search"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/img_add_staff"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_add_staff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

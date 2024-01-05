@@ -14,4 +14,6 @@
     <string name="remove_staff">Xóa nhân viên</string>
     <string name="edit_infor_staff">Chỉnh sửa thông tin</string>
     <string name="close_dialog">Đóng</string>
+    <string name="search">Search here ...</string>
+
 </resources>

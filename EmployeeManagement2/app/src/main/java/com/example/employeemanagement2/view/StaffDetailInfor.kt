@@ -18,7 +18,7 @@ class StaffDetailInfor : AppCompatActivity() {
         binding.tvDepartmentStaff.text = intent.getStringExtra("department_staff")
         binding.tvStatusStaff.text = intent.getStringExtra("status_staff")
 
-        binding.imgBack.setOnClickListener() {
+        binding.ivBack.setOnClickListener() {
             finish()
         }
     }

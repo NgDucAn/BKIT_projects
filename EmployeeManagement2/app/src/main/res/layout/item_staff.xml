@@ -43,12 +43,13 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/img_menu"
+            android:id="@+id/iv_menu"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:src="@drawable/ic_more" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edt_id_staff"
+            android:id="@+id/et_id_staff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edt_name_staff"
+            android:id="@+id/et_name_staff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -55,8 +55,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edt_department_staff"
+        <Spinner
+            android:id="@+id/sp_department_staff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -64,14 +64,13 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/shape_background"
-            android:hint="@string/department_name"
+            android:prompt="@string/department_name"
             android:padding="15dp"
             android:textColor="@color/purple_500"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/edt_status_staff"
+        <Spinner
+            android:id="@+id/sp_status_staff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -79,7 +78,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/shape_background"
-            android:hint="@string/status_name"
+            android:prompt="@string/status_name"
             android:padding="15dp"
             android:textColor="@color/purple_500"
             android:textSize="18sp"

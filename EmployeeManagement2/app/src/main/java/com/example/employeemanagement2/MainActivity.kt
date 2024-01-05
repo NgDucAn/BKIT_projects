@@ -1,6 +1,7 @@
 package com.example.employeemanagement2
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.drawable.LayerDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,8 +12,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.employeemanagement2.databinding.ActivityMainBinding
-import com.example.employeemanagement2.databinding.AddStaffBinding
+import com.example.employeemanagement2.databinding.DialogAddStaffBinding
 import com.example.employeemanagement2.model.StaffData
+import com.example.employeemanagement2.until.AndroidUtil
+import com.example.employeemanagement2.until.OnResultStaffListener
 import com.example.employeemanagement2.view.StaffAdapter
 import java.util.Locale
 
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvListStaff.layoutManager = LinearLayoutManager(this)
         binding.rvListStaff.adapter = staffAdapter
 
-        binding.imgAddStaff.setOnClickListener { addInforStaff() }
+        binding.fbAddStaff.setOnClickListener { addInforStaff() }
 
         binding.svSearchStaff.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -67,33 +70,33 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("InflateParams")
     private fun addInforStaff() {
-        val addDialogBinding = AddStaffBinding.inflate(LayoutInflater.from(this))
-//        val v = LayoutInflater.from(this).inflate(R.layout.add_staff, null)
-//        val id = v.findViewById<EditText>(R.id.edt_id_staff)
-//        val name = v.findViewById<EditText>(R.id.edt_name_staff)
-//        val department = v.findViewById<EditText>(R.id.edt_department_staff)
-//        val status = v.findViewById<EditText>(R.id.edt_status_staff)
-        val id = addDialogBinding.edtIdStaff
-        val name = addDialogBinding.edtNameStaff
-        val department = addDialogBinding.edtDepartmentStaff
-        val status = addDialogBinding.edtStatusStaff
-        val addDialog = AlertDialog.Builder(this)
-        addDialog.setView(addDialogBinding.root)
-        addDialog.setPositiveButton("Ok") { dialog, _ ->
-            val id = id.text.toString()
-            val name = name.text.toString()
-            val department = department.text.toString()
-            val status = status.text.toString()
-            staffList.add(StaffData(id, name, department, status))
-            staffAdapter.notifyDataSetChanged()
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
-        }
-        addDialog.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.dismiss()
-            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
-        }
-        addDialog.create()
-        addDialog.show()
+        AndroidUtil.showMenuAddStaff(this, object : OnResultStaffListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResultStaff(staffData: StaffData) {
+                staffList.add(staffData)
+                staffAdapter.notifyDataSetChanged()
+            }
+        })
+//        val addDialogBinding = DialogAddStaffBinding.inflate(LayoutInflater.from(this))
+//        val addDialog = AlertDialog.Builder(this@MainActivity)
+//        with(addDialogBinding) {
+//            addDialog.setView(addDialogBinding.root)
+//            addDialog.setPositiveButton("Ok") { dialog, _ ->
+//                val id = addDialogBinding.etIdStaff.text.toString()
+//                val name = addDialogBinding.etNameStaff.text.toString()
+//                val department = addDialogBinding.spDepartmentStaff.dropDownVerticalOffset.toString()
+//                val status = addDialogBinding.spStatusStaff.dropDownVerticalOffset.toString()
+//                staffList.add(StaffData(id, name, department, status))
+//                staffAdapter.notifyDataSetChanged()
+//                Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
+//                dialog.dismiss()
+//            }
+//            addDialog.setNegativeButton("Cancel") { dialog, _ ->
+//                dialog.dismiss()
+//                Toast.makeText(this@MainActivity, "Cancel", Toast.LENGTH_SHORT).show()
+//            }
+//            addDialog.create()
+//            addDialog.show()
+//        }
     }
 }
