@@ -4,12 +4,10 @@
     <item
         android:id="@+id/tv_edit_infor_staff"
         android:title="@string/edit_infor_staff"
-        android:icon="@drawable/ic_editing"
         />
     <item
         android:id="@+id/tv_remove_staff"
         android:title="@string/remove_staff"
-        android:icon="@drawable/ic_delete"
         />
 
 </menu>

@@ -38,11 +38,11 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_status"
+                android:id="@+id/tv_department"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:text="@string/status_name"
+                android:text="@string/department_name"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -50,13 +50,11 @@
 
         <ImageView
             android:id="@+id/iv_menu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:src="@drawable/ic_more" />
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

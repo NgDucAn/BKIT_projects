@@ -17,29 +17,25 @@ object AndroidUtil {
     ) {
         val dialogView = LayoutInflater.from(context)
             .inflate(R.layout.dialog_add_staff, null)
-        val dialogBinding = DialogAddStaffBinding.bind(dialogView)
-        with(dialogBinding) {
-
-            val listSpiner = ListSpiner()
+        val binding = DialogAddStaffBinding.bind(dialogView)
+        with(binding) {
+            val listSpinner = ListSpiner()
             val departmentAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
-                listSpiner.itemsDepartment
+                listSpinner.itemsDepartment
             )
             departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spDepartmentStaff.adapter = departmentAdapter
-
             val statusAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
-                listSpiner.itemsStatus
+                listSpinner.itemsStatus
             )
             statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spStatusStaff.adapter = statusAdapter
-
             AlertDialog.Builder(context).setView(dialogView)
                 .setPositiveButton("Ok") { dialog, _ ->
-
                     onResultStaffListener.onResultStaff(
                         StaffData(
                             etIdStaff.text.toString(),
@@ -49,7 +45,6 @@ object AndroidUtil {
                             false
                         )
                     )
-
                     Toast.makeText(
                         context, "Thông tin nhân viên đã thay đổi", Toast.LENGTH_SHORT
                     ).show()
@@ -68,12 +63,11 @@ object AndroidUtil {
             .inflate(R.layout.dialog_add_staff, null)
         val dialogBinding = DialogAddStaffBinding.bind(dialogView)
         with(dialogBinding) {
-
-            val listSpiner = ListSpiner()
+            val listSpinner = ListSpiner()
             val departmentAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
-                listSpiner.itemsDepartment
+                listSpinner.itemsDepartment
             )
             departmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spDepartmentStaff.adapter = departmentAdapter
@@ -81,14 +75,13 @@ object AndroidUtil {
             val statusAdapter = ArrayAdapter(
                 context,
                 android.R.layout.simple_spinner_item,
-                listSpiner.itemsStatus
+                listSpinner.itemsStatus
             )
             statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spStatusStaff.adapter = statusAdapter
 
             AlertDialog.Builder(context).setView(dialogView)
                 .setPositiveButton("Ok") { dialog, _ ->
-
                     onResultStaffListener.onResultStaff(
                         StaffData(
                             etIdStaff.text.toString(),

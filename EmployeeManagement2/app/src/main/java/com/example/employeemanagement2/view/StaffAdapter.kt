@@ -7,12 +7,8 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnLayoutChangeListener
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import android.widget.PopupMenu
-import android.widget.RadioGroup
-import android.widget.RadioGroup.OnCheckedChangeListener
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.employeemanagement2.R
@@ -24,34 +20,31 @@ import com.example.employeemanagement2.until.OnResultStaffListener
 class StaffAdapter(
     val context: Context, var staffList: ArrayList<StaffData>
 ) : RecyclerView.Adapter<StaffAdapter.StaffViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemStaffBinding.inflate(inflater, parent, false)
+        val binding = ItemStaffBinding
+            .inflate(LayoutInflater
+                .from(parent.context), parent, false)
         return StaffViewHolder(binding)
     }
 
     @SuppressLint("RecyclerView")
     override fun onBindViewHolder(holder: StaffViewHolder, position: Int) {
-        val newList = staffList[position]
-        holder.binding.tvNameStaff.text = newList.nameStaff
-        holder.binding.tvStatus.text = newList.status
-
+        val staff = staffList[position]
+        holder.binding.tvNameStaff.text = staff.nameStaff
+        holder.binding.tvDepartment.text = staff.department
         holder.itemView.setOnClickListener() {
-            val intentInforStaff = Intent(context, StaffDetailInfor::class.java)
-            intentInforStaff.putExtra("id_staff", newList.id)
-            intentInforStaff.putExtra("name_staff", newList.nameStaff)
-            intentInforStaff.putExtra("department_staff", newList.department)
-            intentInforStaff.putExtra("status_staff", newList.status)
-
-            context.startActivity(intentInforStaff)
+            val intentInfoStaff = Intent(context, StaffDetailInfoActivity::class.java)
+            intentInfoStaff.putExtra("staffInfo", staff)
+            context.startActivity(intentInfoStaff)
         }
 
-        holder.binding.cbSelect.isChecked = newList.selected
+        holder.binding.cbSelect.setOnCheckedChangeListener(null)
+        holder.binding.cbSelect.isChecked = staff.selected
 
-        holder.binding.cbSelect.setOnCheckedChangeListener { _, p1 ->
-            staffList[position].selected = p1
+        holder.binding.cbSelect.setOnCheckedChangeListener { _, isChecked ->
+            staffList[position].selected = isChecked
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -60,12 +53,14 @@ class StaffAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun deleteItem() {
-        for (i in staffList) {
-            if (i.selected) {
-                Log.d("ASAHSKASH", ""+i.selected)
-                staffList.remove(i)
-            }
-        }
+        val itemsToRemove = staffList.filter { it.selected }.toList()
+        staffList.removeAll(itemsToRemove)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun selectAllItems() {
+        staffList.forEach { it.selected = true }
         notifyDataSetChanged()
     }
 
@@ -78,19 +73,17 @@ class StaffAdapter(
         @SuppressLint("ResourceType", "MissingInflatedId", "CutPasteId", "NotifyDataSetChanged")
         private fun popupMenus(view: View?) {
             val popupMenus = PopupMenu(itemView.context, view)
-            val staffData = staffList[position]
             popupMenus.inflate(R.menu.show_menu)
             popupMenus.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.tv_edit_infor_staff-> {
                         showMenuEditStaff(context, object : OnResultStaffListener{
                             override fun onResultStaff(staffData: StaffData) {
-                                staffList.removeAt(position)
-                                staffList.add(staffData)
-                                notifyDataSetChanged()
+                                staffList[adapterPosition] = staffData
+                                notifyItemChanged(adapterPosition)
                             }
                         })
-                            true
+                        true
                     }
 
                     R.id.tv_remove_staff -> {
@@ -99,7 +92,7 @@ class StaffAdapter(
                             .setMessage("Bạn có chắc chắn xóa thông tin nhân viên")
                             .setPositiveButton("Yes") { dialog, _ ->
                                 staffList.removeAt(adapterPosition)
-                                notifyDataSetChanged()
+                                notifyItemRemoved(adapterPosition)
                                 Toast.makeText(
                                     context, "Xóa thông tin nhân viên", Toast.LENGTH_SHORT
                                 ).show()
@@ -107,10 +100,8 @@ class StaffAdapter(
                             }.setNegativeButton("No") { dialog, _ ->
                                 dialog.dismiss()
                             }.create().show()
-
                         true
                     }
-
                     else -> true
                 }
             }
