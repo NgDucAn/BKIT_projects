@@ -53,9 +53,16 @@ class StaffAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun deleteItem() {
-        val itemsToRemove = staffList.filter { it.selected }.toList()
-        staffList.removeAll(itemsToRemove)
-        notifyDataSetChanged()
+        val itemsToRemove = mutableListOf<StaffData>()
+        staffList.filterTo(itemsToRemove) { it.selected }
+
+        itemsToRemove.forEach { staffData ->
+            val index = staffList.indexOf(staffData)
+            if (index != -1) {
+                staffList.removeAt(index)
+                notifyItemRemoved(index)
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
