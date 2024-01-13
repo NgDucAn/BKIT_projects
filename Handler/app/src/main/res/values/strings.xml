@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Handler</string>
+    <string name="plus_delay_1s">Cộng 1 sau khi delay 1s</string>
+    <string name="minus_delay_1s">Trừ 1 sau khi delay 1s</string>
+    <string name="multiply_delay_5s">Nhân 2 sau khi delay 5s</string>
+    <string name="random_delay_3s">Random 1 số ngẫu nhiên sau mỗi 3s</string>
+    <string name="value">Giá trị hiện tại là: </string>
+    <string name="use_addition">Dừng cộng</string>
+    <string name="use_minus">Dừng trừ</string>
+    <string name="use_kernel">Dừng nhân</string>
+    <string name="use_random">Dừng random</string>
+</resources>
