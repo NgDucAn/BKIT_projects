@@ -2,9 +2,8 @@ package com.example.coroutines
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.example.coroutines.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -16,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var isRunningMinus = true
     private var isRunningMultiply = true
     private var isRunningRandom = true
+    private val coroutineScope = lifecycleScope
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +49,11 @@ class MainActivity : AppCompatActivity() {
             binding.btStopRandom.text = if (isRunningRandom) "Dừng Random" else "Chạy lại Random"
         }
         startRandomGeneration()
-
     }
 
+
     private fun startPlusGeneration() {
-        GlobalScope.launch(Dispatchers.Main) {
+        coroutineScope.launch {
             var plus = 0
             while (isActive) {
                 if (isRunningPlus) {
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMinusGeneration() {
-        GlobalScope.launch(Dispatchers.Main) {
+        coroutineScope.launch {
             var minus = 0
             while (isActive) {
                 if (isRunningMinus) {
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMultiplyGeneration() {
-        GlobalScope.launch(Dispatchers.Main) {
+        coroutineScope.launch {
             var multiply = 1
             while (isActive) {
                 if (isRunningMultiply) {
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startRandomGeneration() {
-        GlobalScope.launch(Dispatchers.Main) {
+        coroutineScope.launch {
             val random = Random
             while (isActive) { //kiem tra trang thai cua coroutine
                 if (isRunningRandom) {
@@ -103,4 +103,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
