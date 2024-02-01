@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NoteApp2</string>
+    <string name="title">Chủ đề</string>
+    <string name="content">Nội dung</string>
+    <string name="editTime">Thời gian</string>
+    <string name="addNote">Thêm ghi chú</string>
+    <string name="editNote">Chỉnh sửa ghi chú</string>
+</resources>
