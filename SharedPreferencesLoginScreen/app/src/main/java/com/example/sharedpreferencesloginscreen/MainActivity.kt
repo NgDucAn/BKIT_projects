@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             binding.etEmailSignUp.text.clear()
             binding.etPasswordSignUp.text.clear()
-            binding.cbRemember.isChecked = false
+            binding.cbRemember. isChecked = false
             isChecked = false
         }
     }

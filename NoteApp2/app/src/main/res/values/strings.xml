@@ -5,4 +5,5 @@
     <string name="editTime">Thời gian</string>
     <string name="addNote">Thêm ghi chú</string>
     <string name="editNote">Chỉnh sửa ghi chú</string>
+    <string name="search">Search here ...</string>
 </resources>

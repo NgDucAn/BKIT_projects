@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ScanFile</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="freeSpace">Dung lượng trống: </string>
+    <string name="memoryStorage">Dung lượng bộ nhớ: </string>
+    <string name="numberScanedFiles">Số file đã quét được: </string>
 </resources>

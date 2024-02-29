@@ -16,13 +16,14 @@ class NotesDataBaseHelper(context: Context) :
         private const val COLUMN_CONTENT = "content"
         private const val COLUMN_TIME = "time"
     }
-
     override fun onCreate(db: SQLiteDatabase?) {
         val createTableQuery =
-            "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_TITLE TEXT, $COLUMN_CONTENT TEXT, $COLUMN_TIME TEXT)"
+            "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY, " +
+                    "$COLUMN_TITLE TEXT, " +
+                    "$COLUMN_CONTENT TEXT, " +
+                    "$COLUMN_TIME TEXT)"
         db?.execSQL(createTableQuery)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
         db?.execSQL(dropTableQuery)
@@ -72,7 +73,7 @@ class NotesDataBaseHelper(context: Context) :
         db.close()
     }
 
-    fun getNoteByID(noteId: Int) : Note {
+    fun getNoteByID(noteId: Int): Note {
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $noteId"
         val cursor = db.rawQuery(query, null)

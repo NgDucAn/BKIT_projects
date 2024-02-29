@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     private var isRunningMinus = true
     private var isRunningMultiply = true
     private var isRunningRandom = true
-    private val coroutineScope = lifecycleScope
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +50,8 @@ class MainActivity : AppCompatActivity() {
         startRandomGeneration()
     }
 
-
     private fun startPlusGeneration() {
-        coroutineScope.launch {
+        lifecycleScope.launch {
             var plus = 0
             while (isActive) {
                 if (isRunningPlus) {
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMinusGeneration() {
-        coroutineScope.launch {
+        lifecycleScope.launch {
             var minus = 0
             while (isActive) {
                 if (isRunningMinus) {
@@ -79,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMultiplyGeneration() {
-        coroutineScope.launch {
+        lifecycleScope.launch {
             var multiply = 1
             while (isActive) {
                 if (isRunningMultiply) {
@@ -92,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startRandomGeneration() {
-        coroutineScope.launch {
+        lifecycleScope.launch {
             val random = Random
             while (isActive) { //kiem tra trang thai cua coroutine
                 if (isRunningRandom) {
@@ -103,5 +101,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }

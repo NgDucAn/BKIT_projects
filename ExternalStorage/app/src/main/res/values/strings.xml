@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ExternalStorage</string>
+    <string name="text_view_data">Enter the Text Data</string>
+    <string name="edit_text_data">Enter your information</string>
+    <string name="view_button">View Information</string>
+    <string name="save_button_public">Save Publicly</string>
+    <string name="save_button_private">Save Privately</string>
+
+    <string name="text_view_saved_data">Saved Text Data</string>
+    <string name="saved_information">Click to view saved information</string>
+    <string name="back_button">Go Back</string>
+    <string name="show_button_public">Public Data</string>
+    <string name="show_button_private">Private Data</string>
 </resources>
