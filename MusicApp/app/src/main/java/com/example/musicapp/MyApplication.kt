@@ -7,7 +7,7 @@ import android.os.Build
 
 class MyApplication : Application() {
     companion object{
-        const val CHANNEL_ID = "channel1"
+        const val CHANNEL_ID = "MusicPlayer"
         const val PLAY = "play"
         const val NEXT = "next"
         const val PREVIOUS = "previous"
