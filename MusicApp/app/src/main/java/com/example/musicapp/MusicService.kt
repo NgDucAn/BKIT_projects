@@ -127,7 +127,7 @@ class MusicService : Service() {
             .addAction(playPauseBtn, "Play/Pause", playPausePendingIntent)
             .addAction(R.drawable.ic_next, "Next", null) // Thêm các nút điều khiển khác nếu cần
             .build()
-
         startForeground(13, notification)
+
     }
 }
