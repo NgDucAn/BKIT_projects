@@ -39,13 +39,14 @@ import java.io.IOException
 
 class PlayerActivity : AppCompatActivity() {
     companion object {
-        var mediaPlayer: MediaPlayer? = null
+//        var mediaPlayer: MediaPlayer? = null
         lateinit var musicList : ArrayList<Music>
         var songPosition: Int = 0
         var isPlaying: Boolean = true
         var notificationId = 1
         var musicService : MusicService? = null
         var isServiceConnected : Boolean = false
+        @SuppressLint("StaticFieldLeak")
         lateinit var binding: ActivityPlayerBinding
     }
 
@@ -81,12 +82,16 @@ class PlayerActivity : AppCompatActivity() {
         binding.ibBackBtn.setOnClickListener {
             finish()
         }
-        binding.seekBarPA.progress = mediaPlayer?.currentPosition!!
-        binding.seekBarPA.max = mediaPlayer?.duration!!
+        binding.seekBarPA.progress = musicService?.mediaPlayer?.currentPosition!!
+        binding.seekBarPA.max = musicService?.mediaPlayer?.duration!!
         binding.fbPlayPauseBtn.setOnClickListener {
             if (isPlaying) {
+                Log.d("HGHHH","")
                 pauseAudio()
-            } else resumeAudio()
+            } else {
+                resumeAudio()
+                Log.d("aaaaa","")
+            }
         }
         binding.fbPreviousBtn.setOnClickListener {
             seekBackward(5000)
@@ -97,7 +102,7 @@ class PlayerActivity : AppCompatActivity() {
         binding.seekBarPA.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(sneekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    mediaPlayer?.seekTo(progress)
+                    musicService?.mediaPlayer?.seekTo(progress)
                 }
             }
 
@@ -106,8 +111,6 @@ class PlayerActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(sneekBar: SeekBar?) = Unit
         })
     }
-
-
 
 //    private fun playAudio(filePath: String) {
 //        try {
@@ -197,6 +200,8 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer?.let { stopAudio() }
+        musicService?.let {
+            stopAudio()
+        }
     }
 }

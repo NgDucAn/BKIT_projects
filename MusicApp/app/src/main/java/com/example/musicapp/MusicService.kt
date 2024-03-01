@@ -15,10 +15,9 @@ import com.example.musicapp.Contains.PATH
 
 class MusicService : Service(), AudioManager.OnAudioFocusChangeListener {
     private var myBinder = MyBinder()
-    var mediaPlayer: MediaPlayer?=null
-    lateinit var audioManager: AudioManager
+    lateinit var mediaPlayer: MediaPlayer
 
-    inner class MyBinder: Binder() {
+    inner class MyBinder : Binder() {
         fun getMusicService(): MusicService {
             return this@MusicService
         }
@@ -29,7 +28,7 @@ class MusicService : Service(), AudioManager.OnAudioFocusChangeListener {
     }
 
     @SuppressLint("ForegroundServiceType")
-    private fun showNotification() {
+    fun showNotification(playPauseBtn: Int) {
         val intent = Intent(baseContext, MainActivity::class.java)
 
         val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -40,16 +39,20 @@ class MusicService : Service(), AudioManager.OnAudioFocusChangeListener {
 
         val contentIntent = PendingIntent.getActivity(this, 0, intent, flag)
 
-        val prevIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(MyApplication.PREVIOUS)
+        val prevIntent =
+            Intent(baseContext, NotificationReceiver::class.java).setAction(MyApplication.PREVIOUS)
         val prevPendingIntent = PendingIntent.getBroadcast(baseContext, 0, prevIntent, flag)
 
-        val playIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(MyApplication.PLAY)
+        val playIntent =
+            Intent(baseContext, NotificationReceiver::class.java).setAction(MyApplication.PLAY)
         val playPendingIntent = PendingIntent.getBroadcast(baseContext, 0, playIntent, flag)
 
-        val nextIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(MyApplication.NEXT)
+        val nextIntent =
+            Intent(baseContext, NotificationReceiver::class.java).setAction(MyApplication.NEXT)
         val nextPendingIntent = PendingIntent.getBroadcast(baseContext, 0, nextIntent, flag)
 
-        val image = BitmapFactory.decodeResource(resources, R.drawable.music_player_icon_slash_screen)
+        val image =
+            BitmapFactory.decodeResource(resources, R.drawable.music_player_icon_slash_screen)
 
         val notification = NotificationCompat.Builder(baseContext, MyApplication.CHANNEL_ID)
             .setContentIntent(contentIntent)
@@ -61,28 +64,22 @@ class MusicService : Service(), AudioManager.OnAudioFocusChangeListener {
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setOnlyAlertOnce(true)
             .addAction(R.drawable.ic_previous, "Previous", prevPendingIntent)
-            .addAction(R.drawable.ic_pause, "Play", playPendingIntent)
+            .addAction(playPauseBtn, "Play", playPendingIntent)
             .addAction(R.drawable.ic_next, "Next", nextPendingIntent)
             .build()
 
         startForeground(13, notification)
     }
 
-    private fun playAudio(filePath: String) {
-        mediaPlayer = MediaPlayer().apply {
-            setDataSource(filePath)
-            prepare()
-            start()
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
-        mediaPlayer?.isLooping = true
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.isLooping = true
     }
+
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer?.release()
+        mediaPlayer.release()
     }
 
     override fun onBind(intent: Intent?): IBinder {
